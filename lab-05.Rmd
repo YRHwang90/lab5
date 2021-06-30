@@ -18,32 +18,142 @@ states <- read_csv("data/states.csv")
 
 ### Exercise 1
 
-Remove this text, and add your answer for Exercise 1 here.
-Add code chunks as needed.
-Don't forget to label your code chunk.
-Do not use spaces in code chunk labels.
+```{r}
 
+help(dennys)
+help(laquinta)
+
+dn<-dennys
+str(dn)
+
+
+
+dn_ak<-dn %>%
+  filter(state=="AK")
+
+str(dn_ak)
+nrow(dn_ak)
+
+
+lq<-laquinta
+lq_ak<-lq %>%
+  filter(state=="AK")
+str(lq_ak)
+```
 ### Exercise 2
 
-Remove this text, and add your answer for Exercise 1 here.
-Add code chunks as needed.
-Don't forget to label your code chunk.
-Do not use spaces in code chunk labels.
+```{r}
 
+dn_lq_ak<-full_join(dn_ak, lq_ak, by=
+                      "state")
+View(dn_ak)
+View(lq_ak)
+View(dn_lq_ak)
+```
 ### Exercise 3
 
-...
+```{r}
+
+haversine <- function(long1, lat1, long2, lat2, round = 3) {
+  # convert to radians
+  long1 = long1 * pi / 180
+  lat1  = lat1  * pi / 180
+  long2 = long2 * pi / 180
+  lat2  = lat2  * pi / 180  
+  
+  R = 6371 # Earth mean radius in km
+  
+  a = sin((lat2 - lat1)/2)^2 + cos(lat1) * cos(lat2) * sin((long2 - long1)/2)^2
+  d = R * 2 * asin(sqrt(a))
+  
+  return( round(d,round) ) # distance in km
+}
+
+```
 
 ### Exercise 4
 
-...
+```{r}
+dn_lq_ak <- dn_lq_ak %>%
+  mutate(distance = haversine(longitude.x,latitude.x, longitude.x, latitude.y))
 
+View(dn_lq_ak)
+
+
+```
 ### Exercise 5
+```{r}
 
+dn_lq_ak_mindist <-dn_lq_ak %>%
+  group_by(address.x) %>%
+  summarize(closest=min(distance))
+
+View(dn_lq_ak_mindist)
+
+```
 ...
 
-### Exercise 6
+### Exercise 6 NC
 
-...
+```{r}
 
-Add exercise headings as needed.
+
+
+dn_NC<-dn %>%
+  filter(state=="NC")
+
+str(dn_NC)
+nrow(dn_NC)
+
+
+lq<-laquinta
+lq_NC<-lq %>%
+  filter(state=="NC")
+str(lq_NC)
+
+
+dn_lq_NC<-full_join(dn_NC, lq_NC, by=
+                      "state")
+
+dn_lq_NC <- dn_lq_NC %>%
+  mutate(distance = haversine(longitude.x,latitude.x, longitude.x, latitude.y))
+
+
+dn_lq_NC_mindist <-dn_lq_NC %>%
+  group_by(address.x) %>%
+  summarize(closest=min(distance))%>%
+  View()
+
+```
+
+## Texas
+
+```{r}
+
+
+dn_TX<-dn %>%
+  filter(state=="TX")
+
+str(dn_TX)
+nrow(dn_TX)
+
+
+lq<-laquinta
+lq_TX<-lq %>%
+  filter(state=="TX")
+str(lq_TX)
+
+
+dn_lq_TX<-full_join(dn_TX, lq_TX, by=
+                      "state")
+
+dn_lq_TX <- dn_lq_TX %>%
+  mutate(distaTXe = haversine(longitude.x,latitude.x, longitude.x, latitude.y))
+
+
+dn_lq_TX_mindist <-dn_lq_TX %>%
+  group_by(address.x) %>%
+  summarize(closest=min(distaTXe))%>%
+  View()
+
+````
