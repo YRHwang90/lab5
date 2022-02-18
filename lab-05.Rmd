@@ -20,37 +20,35 @@ states <- read_csv("data/states.csv")
 
 ```{r}
 
-help(dennys)
-help(laquinta)
-
+#1
 dn<-dennys
+lq<-laquinta
+
 str(dn)
-
-
 
 dn_ak<-dn %>%
   filter(state=="AK")
-
 str(dn_ak)
 nrow(dn_ak)
+```
+### Exercise 2
 
-
-lq<-laquinta
+```{r}
 lq_ak<-lq %>%
   filter(state=="AK")
 str(lq_ak)
+nrow(lq_ak)
 ```
-### Exercise 2
+### Exercise 3,4
 
 ```{r}
 
 dn_lq_ak<-full_join(dn_ak, lq_ak, by=
                       "state")
-View(dn_ak)
-View(lq_ak)
-View(dn_lq_ak)
+
+print(dn_lq_ak)
 ```
-### Exercise 3
+### Exercise 5
 
 ```{r}
 
@@ -71,29 +69,55 @@ haversine <- function(long1, lat1, long2, lat2, round = 3) {
 
 ```
 
-### Exercise 4
+### Exercise 6
 
 ```{r}
 dn_lq_ak <- dn_lq_ak %>%
   mutate(distance = haversine(longitude.x,latitude.x, longitude.x, latitude.y))
 
-View(dn_lq_ak)
+print(dn_lq_ak)
 
 
 ```
-### Exercise 5
+### Exercise 7,8
 ```{r}
 
 dn_lq_ak_mindist <-dn_lq_ak %>%
   group_by(address.x) %>%
   summarize(closest=min(distance))
 
-View(dn_lq_ak_mindist)
+print(dn_lq_ak_mindist)
+
+
 
 ```
+
+```{r}
+
+dn_lq_ak_mindist %>%
+ ggplot( mapping=aes(x=address.x,y=closest)) +
+  geom_col()
+
+
+
+
+```
+
+### Another way of more intuitive visualization (ak)
+
+```{r}
+dn_ak$name<-'dn'
+lq_ak$name<-'lq'
+dnlq_ak <- rbind(dn_ak,lq_ak)
+ggplot(dnlq_ak, mapping = aes(x = longitude, y = latitude, color = name)) +
+  geom_point(alpha=0.9)+
+  ggtitle("DN and LQ in AK")
+
+```
+
 ...
 
-### Exercise 6 NC
+### Exercise 9 NC
 
 ```{r}
 
@@ -122,7 +146,29 @@ dn_lq_NC <- dn_lq_NC %>%
 dn_lq_NC_mindist <-dn_lq_NC %>%
   group_by(address.x) %>%
   summarize(closest=min(distance))%>%
-  View()
+  print()
+
+## messy graph
+dn_lq_NC_mindist %>%
+ ggplot( mapping=aes(x=address.x,y=closest)) +
+  geom_col()
+
+## less messy graph
+dn_lq_NC_mindist %>% 
+  ggplot(mapping = aes(x = closest)) +
+  geom_histogram() 
+
+## intuitive graph
+dn_NC2<-dn_NC
+lq_NC2<-lq_NC
+dn_NC2$name<-'dn'
+lq_NC2$name<-'lq'
+dnlq_NC2 <- rbind(dn_NC2,lq_NC2)
+ggplot(dnlq_NC2, mapping = aes(x = longitude, y = latitude, color = name)) +
+  geom_point(alpha=0.9)+
+  ggtitle("DN and LQ in NC") 
+
+            
 
 ```
 
@@ -148,12 +194,89 @@ dn_lq_TX<-full_join(dn_TX, lq_TX, by=
                       "state")
 
 dn_lq_TX <- dn_lq_TX %>%
-  mutate(distaTXe = haversine(longitude.x,latitude.x, longitude.x, latitude.y))
+  mutate(distance = haversine(longitude.x,latitude.x, longitude.x, latitude.y))
 
 
 dn_lq_TX_mindist <-dn_lq_TX %>%
   group_by(address.x) %>%
-  summarize(closest=min(distaTXe))%>%
-  View()
+  summarize(closest=min(distance))%>%
+  print()
 
-````
+```
+
+Visulization
+
+```{R}
+
+
+## less messy graph
+dn_lq_TX_mindist %>% 
+  ggplot(mapping = aes(x = closest)) +
+  geom_histogram() 
+
+## intuitive graph
+dn_TX2<-dn_TX
+lq_TX2<-lq_TX
+dn_TX2$name<-'dn'
+lq_TX2$name<-'lq'
+dnlq_TX2 <- rbind(dn_TX2,lq_TX2)
+ggplot(dnlq_TX2, mapping = aes(x = longitude, y = latitude, color = name)) +
+  geom_point(alpha=0.3)+
+  ggtitle("DN and LQ in TX") 
+
+
+
+
+```
+
+### OH state
+
+```{r}
+
+
+dn_OH<-dn %>%
+  filter(state=="OH")
+
+str(dn_OH)
+nrow(dn_OH)
+
+
+lq<-laquinta
+lq_OH<-lq %>%
+  filter(state=="OH")
+str(lq_OH)
+
+
+dn_lq_OH<-full_join(dn_OH, lq_OH, by=
+                      "state")
+
+dn_lq_OH <- dn_lq_OH %>%
+  mutate(distance = haversine(longitude.x,latitude.x, longitude.x, latitude.y))
+
+
+dn_lq_OH_mindist <-dn_lq_OH %>%
+  group_by(address.x) %>%
+  summarize(closest=min(distance))%>%
+  print()
+```
+
+
+```{r}
+
+
+## less messy graph
+dn_lq_OH_mindist %>% 
+  ggplot(mapping = aes(x = closest)) +
+  geom_histogram() 
+
+## intuitive graph
+dn_OH2<-dn_OH
+lq_OH2<-lq_OH
+dn_OH2$name<-'dn'
+lq_OH2$name<-'lq'
+dnlq_OH2 <- rbind(dn_OH2,lq_OH2)
+ggplot(dnlq_OH2, mapping = aes(x = longitude, y = latitude, color = name)) +
+  geom_point(alpha=0.5)+
+  ggtitle("DN and LQ in OH") 
+
+```
