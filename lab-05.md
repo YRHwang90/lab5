@@ -287,16 +287,7 @@ dn_lq_NC_mindist <-dn_lq_NC %>%
     ## # ... with 18 more rows
 
 ``` r
-## messy graph
-dn_lq_NC_mindist %>%
- ggplot( mapping=aes(x=address.x,y=closest)) +
-  geom_col()
-```
-
-![](lab-05_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
-
-``` r
-## less messy graph
+##  graph
 dn_lq_NC_mindist %>% 
   ggplot(mapping = aes(x = closest)) +
   geom_histogram() 
@@ -304,7 +295,7 @@ dn_lq_NC_mindist %>%
 
     ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
 
-![](lab-05_files/figure-gfm/unnamed-chunk-9-2.png)<!-- -->
+![](lab-05_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
 
 ``` r
 ## intuitive graph
@@ -318,7 +309,7 @@ ggplot(dnlq_NC2, mapping = aes(x = longitude, y = latitude, color = name)) +
   ggtitle("DN and LQ in NC") 
 ```
 
-![](lab-05_files/figure-gfm/unnamed-chunk-9-3.png)<!-- -->
+![](lab-05_files/figure-gfm/unnamed-chunk-9-2.png)<!-- -->
 
 ## Texas
 
@@ -408,13 +399,11 @@ dn_lq_TX_mindist <-dn_lq_TX %>%
 Visulization
 
 ``` r
-## less messy graph
+##  graph
 dn_lq_TX_mindist %>% 
   ggplot(mapping = aes(x = closest)) +
-  geom_histogram() 
+  geom_histogram(binwidth=1) 
 ```
-
-    ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
 
 ![](lab-05_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
 
@@ -518,13 +507,11 @@ dn_lq_OH_mindist <-dn_lq_OH %>%
     ## # ... with 34 more rows
 
 ``` r
-## less messy graph
+##  graph
 dn_lq_OH_mindist %>% 
   ggplot(mapping = aes(x = closest)) +
-  geom_histogram() 
+  geom_histogram(binwidth=1) 
 ```
-
-    ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
 
 ![](lab-05_files/figure-gfm/unnamed-chunk-13-1.png)<!-- -->
 

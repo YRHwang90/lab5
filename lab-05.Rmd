@@ -148,12 +148,9 @@ dn_lq_NC_mindist <-dn_lq_NC %>%
   summarize(closest=min(distance))%>%
   print()
 
-## messy graph
-dn_lq_NC_mindist %>%
- ggplot( mapping=aes(x=address.x,y=closest)) +
-  geom_col()
 
-## less messy graph
+
+##  graph
 dn_lq_NC_mindist %>% 
   ggplot(mapping = aes(x = closest)) +
   geom_histogram() 
@@ -209,10 +206,10 @@ Visulization
 ```{R}
 
 
-## less messy graph
+##  graph
 dn_lq_TX_mindist %>% 
   ggplot(mapping = aes(x = closest)) +
-  geom_histogram() 
+  geom_histogram(binwidth=1) 
 
 ## intuitive graph
 dn_TX2<-dn_TX
@@ -264,10 +261,10 @@ dn_lq_OH_mindist <-dn_lq_OH %>%
 ```{r}
 
 
-## less messy graph
+##  graph
 dn_lq_OH_mindist %>% 
   ggplot(mapping = aes(x = closest)) +
-  geom_histogram() 
+  geom_histogram(binwidth=1) 
 
 ## intuitive graph
 dn_OH2<-dn_OH
