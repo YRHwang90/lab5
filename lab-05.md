@@ -144,7 +144,7 @@ haversine <- function(long1, lat1, long2, lat2, round = 3) {
 
 ``` r
 dn_lq_ak <- dn_lq_ak %>%
-  mutate(distance = haversine(longitude.x,latitude.x, longitude.x, latitude.y))
+  mutate(distance = haversine(longitude.x,latitude.x, longitude.y, latitude.y))
 
 print(dn_lq_ak)
 ```
@@ -174,9 +174,9 @@ print(dn_lq_ak_mindist)
     ## # A tibble: 3 x 2
     ##   address.x        closest
     ##   <chr>              <dbl>
-    ## 1 1929 Airport Way   1.37 
-    ## 2 2900 Denali        0.764
-    ## 3 3850 Debarr Road   2.37
+    ## 1 1929 Airport Way    5.20
+    ## 2 2900 Denali         2.04
+    ## 3 3850 Debarr Road    6.00
 
 ``` r
 dn_lq_ak_mindist %>%
@@ -262,7 +262,7 @@ dn_lq_NC<-full_join(dn_NC, lq_NC, by=
                       "state")
 
 dn_lq_NC <- dn_lq_NC %>%
-  mutate(distance = haversine(longitude.x,latitude.x, longitude.x, latitude.y))
+  mutate(distance = haversine(longitude.x,latitude.x, longitude.y, latitude.y))
 
 
 dn_lq_NC_mindist <-dn_lq_NC %>%
@@ -274,16 +274,16 @@ dn_lq_NC_mindist <-dn_lq_NC %>%
     ## # A tibble: 28 x 2
     ##    address.x                 closest
     ##    <chr>                       <dbl>
-    ##  1 1 Regent Park Boulevard    12.4  
-    ##  2 101 Wintergreen Dr         56.8  
-    ##  3 103 Sedgehill Dr            0.255
-    ##  4 1043 Jimmie Kerr Road       0.896
-    ##  5 1201 S College Road       107.   
-    ##  6 1209 Burkemount Avenue      1.97 
-    ##  7 1493 Us Hwy 74-A Bypass    10.2  
-    ##  8 1524 Dabney Dr             13.0  
-    ##  9 1550 Four Seasons          10.2  
-    ## 10 1800 Princeton-Kenly Road  14.0  
+    ##  1 1 Regent Park Boulevard     108. 
+    ##  2 101 Wintergreen Dr          120. 
+    ##  3 103 Sedgehill Dr             26.7
+    ##  4 1043 Jimmie Kerr Road        36.1
+    ##  5 1201 S College Road         188. 
+    ##  6 1209 Burkemount Avenue       39.1
+    ##  7 1493 Us Hwy 74-A Bypass      70.1
+    ##  8 1524 Dabney Dr               59.5
+    ##  9 1550 Four Seasons           115. 
+    ## 10 1800 Princeton-Kenly Road    55.9
     ## # ... with 18 more rows
 
 ``` r
@@ -372,7 +372,7 @@ dn_lq_TX<-full_join(dn_TX, lq_TX, by=
                       "state")
 
 dn_lq_TX <- dn_lq_TX %>%
-  mutate(distance = haversine(longitude.x,latitude.x, longitude.x, latitude.y))
+  mutate(distance = haversine(longitude.x,latitude.x, longitude.y, latitude.y))
 
 
 dn_lq_TX_mindist <-dn_lq_TX %>%
@@ -384,16 +384,16 @@ dn_lq_TX_mindist <-dn_lq_TX %>%
     ## # A tibble: 200 x 2
     ##    address.x             closest
     ##    <chr>                   <dbl>
-    ##  1 100 Cottonwood          0.61 
-    ##  2 100 E Pinehurst         0.494
-    ##  3 100 Us Highway 79 S     5.62 
-    ##  4 101 N Fm 707            0.867
-    ##  5 1011 Beltway Parkway    1.74 
-    ##  6 1015 Spur 350 West      0.043
-    ##  7 1015 West Main St       0.164
-    ##  8 10367 Highway 59        2.56 
-    ##  9 10433 N Central Expwy   0.616
-    ## 10 105 W 42nd St           1.02 
+    ##  1 100 Cottonwood         33.6  
+    ##  2 100 E Pinehurst         1.39 
+    ##  3 100 Us Highway 79 S    33.9  
+    ##  4 101 N Fm 707           10.3  
+    ##  5 1011 Beltway Parkway   14.0  
+    ##  6 1015 Spur 350 West      1.74 
+    ##  7 1015 West Main St       1.10 
+    ##  8 10367 Highway 59       37.6  
+    ##  9 10433 N Central Expwy   0.618
+    ## 10 105 W 42nd St           6.88 
     ## # ... with 190 more rows
 
 Visulization
@@ -482,7 +482,7 @@ dn_lq_OH<-full_join(dn_OH, lq_OH, by=
                       "state")
 
 dn_lq_OH <- dn_lq_OH %>%
-  mutate(distance = haversine(longitude.x,latitude.x, longitude.x, latitude.y))
+  mutate(distance = haversine(longitude.x,latitude.x, longitude.y, latitude.y))
 
 
 dn_lq_OH_mindist <-dn_lq_OH %>%
@@ -494,16 +494,16 @@ dn_lq_OH_mindist <-dn_lq_OH %>%
     ## # A tibble: 44 x 2
     ##    address.x                closest
     ##    <chr>                      <dbl>
-    ##  1 10 Airport Rd              0.323
-    ##  2 10480 Baltimore            0.19 
-    ##  3 1050 Mt Vernon Ave        12.6  
-    ##  4 1051 Interstate Court     22.5  
-    ##  5 1122 Buck Road             4.17 
-    ##  6 1136 South Main Street     3.65 
-    ##  7 1256 W High Extension     22.3  
-    ##  8 154 Boardman-Canfield Rd  18.5  
-    ##  9 1681 Home Ave             20.3  
-    ## 10 1750 Cedar Street          3.37 
+    ##  1 10 Airport Rd              79.7 
+    ##  2 10480 Baltimore            19.7 
+    ##  3 1050 Mt Vernon Ave         51.6 
+    ##  4 1051 Interstate Court      54.7 
+    ##  5 1122 Buck Road              5.44
+    ##  6 1136 South Main Street     11.1 
+    ##  7 1256 W High Extension      40.8 
+    ##  8 154 Boardman-Canfield Rd   65.7 
+    ##  9 1681 Home Ave              20.5 
+    ## 10 1750 Cedar Street          38.3 
     ## # ... with 34 more rows
 
 ``` r

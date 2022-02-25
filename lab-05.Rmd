@@ -73,7 +73,7 @@ haversine <- function(long1, lat1, long2, lat2, round = 3) {
 
 ```{r}
 dn_lq_ak <- dn_lq_ak %>%
-  mutate(distance = haversine(longitude.x,latitude.x, longitude.x, latitude.y))
+  mutate(distance = haversine(longitude.x,latitude.x, longitude.y, latitude.y))
 
 print(dn_lq_ak)
 
@@ -140,7 +140,7 @@ dn_lq_NC<-full_join(dn_NC, lq_NC, by=
                       "state")
 
 dn_lq_NC <- dn_lq_NC %>%
-  mutate(distance = haversine(longitude.x,latitude.x, longitude.x, latitude.y))
+  mutate(distance = haversine(longitude.x,latitude.x, longitude.y, latitude.y))
 
 
 dn_lq_NC_mindist <-dn_lq_NC %>%
@@ -191,7 +191,7 @@ dn_lq_TX<-full_join(dn_TX, lq_TX, by=
                       "state")
 
 dn_lq_TX <- dn_lq_TX %>%
-  mutate(distance = haversine(longitude.x,latitude.x, longitude.x, latitude.y))
+  mutate(distance = haversine(longitude.x,latitude.x, longitude.y, latitude.y))
 
 
 dn_lq_TX_mindist <-dn_lq_TX %>%
@@ -248,7 +248,7 @@ dn_lq_OH<-full_join(dn_OH, lq_OH, by=
                       "state")
 
 dn_lq_OH <- dn_lq_OH %>%
-  mutate(distance = haversine(longitude.x,latitude.x, longitude.x, latitude.y))
+  mutate(distance = haversine(longitude.x,latitude.x, longitude.y, latitude.y))
 
 
 dn_lq_OH_mindist <-dn_lq_OH %>%
